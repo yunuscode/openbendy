@@ -21,9 +21,9 @@ final class OpenBendyTests: XCTestCase {
         let defaults = UserDefaults(suiteName: key)!
         defer { defaults.removePersistentDomain(forName: key) }
         let p = Preferences(defaults: defaults)
-        p.style = .arc; p.blur = 0.23; p.clearAngle = 120; p.sound = false
+        p.style = .book; p.blur = 0.23; p.clearAngle = 120; p.sound = false
         let restored = Preferences(defaults: defaults)
-        XCTAssertEqual(restored.style, .arc); XCTAssertEqual(restored.blur, 0.23)
+        XCTAssertEqual(restored.style, .book); XCTAssertEqual(restored.blur, 0.23)
         XCTAssertEqual(restored.clearAngle, 120); XCTAssertFalse(restored.sound)
         p.enabled = true
         XCTAssertTrue(Preferences(defaults: defaults).resumeDesktopEffect)
@@ -141,6 +141,52 @@ final class OpenBendyTests: XCTestCase {
         XCTAssertEqual(try fixture.render(progress: 0, style: 3), pixels, "Reopening must restore every pixel.")
     }
 
+    func testBookLeafCrossesSpineAndOccludesRightLeaf() throws {
+        let size = 512
+        var pixels = [UInt8](repeating: 255, count: size * size * 4)
+        // Blue left leaf, red right leaf, in the render target's BGRA order.
+        for y in 0..<size { for x in 0..<size {
+            pixels[(y * size + x) * 4] = x < size / 2 ? 255 : 0
+            pixels[(y * size + x) * 4 + 1] = 0
+            pixels[(y * size + x) * 4 + 2] = x < size / 2 ? 0 : 255
+        } }
+        let fixture = try GPUFixture(width: size, height: size, pixels: pixels)
+        XCTAssertEqual(try fixture.render(progress: 0, style: 4), pixels)
+        XCTAssertEqual(try fixture.render(progress: 0.8, perspective: 0, style: 4), pixels)
+        let opened = try fixture.render(progress: 0.25, blur: 0, shadow: 0, style: 4)
+        XCTAssertGreaterThan(opened[(256 * size + 150) * 4], 250)
+        XCTAssertGreaterThan(opened[(256 * size + 400) * 4 + 2], 250)
+        XCTAssertEqual(opened[(256 * size + 10) * 4], 0, "The swinging leaf leaves a dark field behind it.")
+        let closed = try fixture.render(progress: 0.85, blur: 0, shadow: 0, style: 4)
+        XCTAssertGreaterThan(closed[(256 * size + 350) * 4], 250, "The left leaf crosses the spine and covers the right leaf.")
+        XCTAssertEqual(closed[(256 * size + 350) * 4 + 2], 0)
+        XCTAssertEqual(closed[(256 * size + 150) * 4], 0)
+        let edgeOn: Float = 0.5 / 0.96
+        let before = try fixture.render(progress: edgeOn - 0.0001, style: 4)
+        let after = try fixture.render(progress: edgeOn + 0.0001, style: 4)
+        let difference = zip(before, after).reduce(0) { $0 + abs(Int($1.0) - Int($1.1)) }
+        XCTAssertLessThan(Double(difference) / Double(before.count), 0.1, "No flash or jump through the edge-on position.")
+    }
+
+    func testBookProjectionFitsAndScalesWithResolution() throws {
+        func bounds(_ size: Int) throws -> (Double, Double) {
+            let fixture = try GPUFixture(width: size, height: size)
+            let output = try fixture.render(progress: 0.3, blur: 0, shadow: 0, style: 4)
+            let row = (0..<size).map { output[(size / 2 * size + $0) * 4] }
+            let left = try XCTUnwrap(row.firstIndex(where: { $0 > 128 }))
+            let right = try XCTUnwrap(row.lastIndex(where: { $0 > 128 }))
+            XCTAssertGreaterThan(left, size / 6)
+            XCTAssertLessThan(right, size - size / 15)
+            let center = output[(size / 2 * size + size / 2) * 4]
+            XCTAssertGreaterThan(center, 250, "The two leaves meet without a seam.")
+            XCTAssertEqual(output[(size / 2) * 4], 0, "The spine's top is inset to keep the near edge inside the screen.")
+            return (Double(left) / Double(size), Double(right) / Double(size))
+        }
+        let small = try bounds(256), large = try bounds(512)
+        XCTAssertEqual(small.0, large.0, accuracy: 0.005)
+        XCTAssertEqual(small.1, large.1, accuracy: 0.005)
+    }
+
     func testRenderReferenceReviewFrames() throws {
         let width = 960, height = 600
         let colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -164,7 +210,7 @@ final class OpenBendyTests: XCTestCase {
         let fixture = try GPUFixture(width: width, height: height, pixels: bytes)
         let directory = URL(fileURLWithPath: "/private/tmp/openbendy-qa")
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
-        for (label, style) in [("frame", Float(0)), ("arc", Float(3))] {
+        for (label, style) in [("frame", Float(0)), ("arc", Float(3)), ("book", Float(4))] {
           for (index, progress) in [Float(0), 0.08, 0.3, 0.6, 0.9].enumerated() {
             let output = try fixture.render(progress: progress, shadow: 0.5, style: style)
             let provider = try XCTUnwrap(CGDataProvider(data: Data(output) as CFData))

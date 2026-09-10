@@ -66,10 +66,60 @@ float4 arcEffect(float2 position, texture2d<float> desktop, constant Parameters 
     return float4(color * coverage, 1);
 }
 
+// Two leaves share a vertical spine. The left leaf swings toward the viewer
+// and over the right one. Fit the nearest edge inside the display throughout.
+float4 bookEffect(float2 position, texture2d<float> desktop, constant Parameters &u) {
+    constexpr sampler s(coord::normalized, address::clamp_to_edge, filter::linear, mip_filter::linear);
+    float angle = saturate(u.effect.x) * saturate(u.effect.y) * M_PI_F * 0.96;
+    float c = cos(angle), bend = sin(angle);
+    float q = 0.22 * bend, fit = 1.0 - q;
+    float2 size = max(float2(1), u.surface.yz);
+    float2 d = position - 0.5;
+    float3 result = float3(0);
+
+    // Stationary leaf, with a contact shadow that widens as the cover lifts.
+    float2 rightUV = d / fit + 0.5;
+    float rightCoverage = saturate((fit * 0.5 - d.x) * size.x + 0.5)
+                        * saturate((fit * 0.5 - abs(d.y)) * size.y + 0.5);
+    if (d.x >= 0.0 && rightCoverage > 0.0) {
+        float shadow = 0.42 * saturate(u.effect.w) * bend * exp(-max(0.0, rightUV.x - 0.5) / (0.015 + 0.12 * bend));
+        result = desktop.sample(s, rightUV, level(0)).rgb * (1.0 - shadow) * rightCoverage;
+    }
+
+    // Projected edge-to-spine interval. Its coverage vanishes continuously at
+    // edge-on; avoid dividing by the singular homography at ninety degrees.
+    float outer = -0.5 * c;
+    float leafWidthPixels = abs(outer) * size.x;
+    if (leafWidthPixels > 0.001) {
+        float horizontal = saturate((d.x - min(0.0, outer)) * size.x + 0.5)
+                         * saturate((max(0.0, outer) - d.x) * size.x + 0.5);
+        horizontal *= min(1.0, leafWidthPixels);
+        float denominator = fit * c - 2.0 * q * d.x;
+        if (horizontal > 0.0 && abs(denominator) > 0.000001) {
+            float t = saturate(-2.0 * d.x / denominator);
+            float depth = 1.0 - q * t;
+            float halfHeight = 0.5 * fit / depth;
+            float coverage = horizontal * saturate((halfHeight - abs(d.y)) * size.y + 0.5);
+            float2 uv = float2(0.5 - 0.5 * t, d.y * depth / fit + 0.5);
+            // Mips stabilize detail during foreshortening. Optional diffusion
+            // stays close to the crease, leaving the broad faces readable.
+            float compression = depth * depth / max(0.00001, fit * abs(c));
+            float crease = exp(-t / 0.065);
+            float diffusion = 0.003 * size.y * saturate(u.effect.z) * bend * crease;
+            float lod = max(0.0, log2(max(compression, max(1.0, diffusion))));
+            float shade = 1.0 - saturate(u.effect.w) * bend * (0.35 + 0.30 * crease);
+            float3 face = desktop.sample(s, uv, level(lod)).rgb * shade;
+            result = mix(result, face, coverage);
+        }
+    }
+    return float4(result, 1);
+}
+
 fragment float4 bendFragment(Varying in [[stage_in]], texture2d<float> desktop [[texture(0)]], constant Parameters &u [[buffer(0)]]) {
     constexpr sampler s(coord::normalized, address::clamp_to_edge, filter::linear, mip_filter::linear);
     float p = saturate(u.effect.x);
     if (p <= 0.00001) return float4(desktop.sample(s, in.uv, level(0)).rgb, 1);
+    if (u.surface.x > 3.5) return bookEffect(in.uv, desktop, u);
     if (u.surface.x > 2.5) return arcEffect(in.uv, desktop, u);
 
     // Project a plane rotating away from a fixed bottom hinge. Blur has a separate,

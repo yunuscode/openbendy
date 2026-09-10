@@ -24,7 +24,7 @@ targets:
         INFOPLIST_KEY_LSUIElement: YES
         INFOPLIST_KEY_NSScreenCaptureUsageDescription: OpenBendy uses live screen frames to bend your desktop as the lid closes. Frames stay in memory on this Mac.
         INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.utilities
-        MARKETING_VERSION: '1.0.3'
+        MARKETING_VERSION: '1.0.4'
         CURRENT_PROJECT_VERSION: '1'
   OpenBendyTests:
     type: bundle.unit-test

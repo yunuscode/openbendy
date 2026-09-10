@@ -74,11 +74,11 @@ struct SettingsView: View {
             }
             VStack(alignment: .leading, spacing: 9) {
                 Text("Style").fontWeight(.semibold).foregroundStyle(.white.opacity(0.65)).padding(.leading, 4)
-                HStack(spacing: 12) {
+                HStack(spacing: 8) {
                     ForEach(BendStyle.allCases) { style in
                         Button { prefs.style = style } label: {
                             VStack(spacing: 7) {
-                                PreviewEffect(params: .init(angle: 62, clearAngle: 135, perspective: style == .arc ? 1 : (style == .silk ? 0 : 0.3), blur: style == .frost ? 0.8 : 0.65, shadow: style == .shade ? 1 : 0.2, style: style))
+                                PreviewEffect(params: .init(angle: 62, clearAngle: 135, perspective: style == .arc || style == .book ? 1 : (style == .silk ? 0 : 0.3), blur: style == .frost ? 0.8 : 0.65, shadow: style == .shade ? 1 : 0.2, style: style))
                                     .aspectRatio(1.58, contentMode: .fit)
                                     .background(.black.opacity(0.3), in: RoundedRectangle(cornerRadius: 8))
                                     .overlay(RoundedRectangle(cornerRadius: 8).stroke(prefs.style == style ? Color(hex: 0x00a4ff) : .clear, lineWidth: 2))
@@ -152,7 +152,7 @@ struct SettingsView: View {
             Link("openbendy.com", destination: URL(string: "https://openbendy.com")!)
             Text("Your desktop bends as you close the lid.").font(.system(size: 15))
             Text("Native SwiftUI, ScreenCaptureKit and Metal.\nBuilt for Apple silicon Macs running macOS 14 or later.").foregroundStyle(.secondary).lineSpacing(5)
-            Text("Version 1.0.3").font(.system(size: 11)).foregroundStyle(.secondary)
+            Text("Version 1.0.4").font(.system(size: 11)).foregroundStyle(.secondary)
         }
     }
 }
