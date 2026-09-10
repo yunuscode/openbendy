@@ -26,8 +26,9 @@ extract it, and move `OpenBendy.app` to Applications.
 Requires macOS 14 or later. The binary includes Apple silicon and Intel architectures;
 live lid tracking has been verified on an M3 Pro MacBook Pro only.
 
-The current release is signed with an Apple Development certificate and is **not
-notarized**. It does not currently pass Gatekeeper assessment for public distribution.
+The current release is **Developer ID signed and notarized by Apple**, with the
+notarization ticket attached for offline verification. Gatekeeper assessment passes.
+If you downloaded the earlier build, replace it with a fresh download from the release.
 You can also build locally using the instructions below.
 
 ## Build and run

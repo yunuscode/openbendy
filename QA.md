@@ -25,3 +25,12 @@ Verified on a MacBook Pro with M3 Pro, macOS 27, and Xcode 26.1.1.
 - Open-at-login registration.
 
 Hardware compatibility beyond the tested MacBook has not been verified.
+
+## Public release signing
+
+- Signed with Developer ID Application for team RFKJ82VWM2, with hardened runtime and Apple's secure timestamp.
+- Apple notarization accepted submission `cc60b26e-921a-4914-99aa-a182b49ddcb2`.
+- Notarization ticket stapled to the app and validated.
+- Strict signature checks passed for both Apple silicon and Intel architectures.
+- Gatekeeper assessment returned `accepted`, with source `Notarized Developer ID`.
+- Signing private keys and API credentials are excluded from source and release archives.
