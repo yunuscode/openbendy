@@ -15,7 +15,7 @@ struct BendParameters {
 }
 
 enum BendStyle: String, CaseIterable, Identifiable {
-    case silk = "Silk", shade = "Shade", frost = "Frost"
+    case silk = "Silk", shade = "Shade", frost = "Frost", arc = "Arc"
     var id: String { rawValue }
     var index: Int { Self.allCases.firstIndex(of: self)! }
 }

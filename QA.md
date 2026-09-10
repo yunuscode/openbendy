@@ -5,7 +5,7 @@ Verified on a MacBook Pro with M3 Pro, macOS 27, and Xcode 26.1.1.
 ## Completed
 
 - Debug and Release builds succeeded.
-- Seven XCTest cases passed, including Metal readback and SwiftUI preview texture upload.
+- Nine XCTest cases passed, including Metal readback and SwiftUI preview texture upload.
 - Native settings controls were exercised: styles, preview playback, effect sliders,
   Follow lid, navigation, sound toggle, reset, and permission recovery.
 - ScreenCaptureKit started after Screen Recording permission was granted.
@@ -34,3 +34,14 @@ Hardware compatibility beyond the tested MacBook has not been verified.
 - Strict signature checks passed for both Apple silicon and Intel architectures.
 - Gatekeeper assessment returned `accepted`, with source `Notarized Developer ID`.
 - Signing private keys and API credentials are excluded from source and release archives.
+
+## Arc effect (1.0.3)
+
+- Added a fourth selectable effect, Arc, to both the native preview and live renderer.
+- The screen keeps its full height; its sides curve inward while the top and bottom remain pinned.
+- The body softens progressively, using mip-filtered sampling to avoid sparse-tap artifacts.
+- Native checks verified Arc selection, switching back to Silk, manual angle control, preview playback, and version 1.0.3.
+- Two new Metal readback tests cover symmetric and resolution-independent curvature, increasing deformation, pinned edges, early diffusion, and exact restoration. All nine tests pass.
+- Visually reviewed GPU frames and the four-item style row. Labels fit, selection is visible, and all existing controls remain accessible through the native scroll view.
+- Live capture requested renewed Screen Recording permission during the 1.0.3 preview check; physical lid matching for Arc remains a user device check.
+- 1.0.3 notarization accepted submission `1e51a8fb-f3c9-4508-aa2f-5351938c02d6`; the ticket was stapled and validated, and the installed app passed Gatekeeper as `Notarized Developer ID`.

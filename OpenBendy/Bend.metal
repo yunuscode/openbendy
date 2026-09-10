@@ -21,10 +21,56 @@ float gaussianCoverage(float distance, float sigma) {
     return x >= 0.0 ? 1.0 - tail : tail;
 }
 
+// A bowed sheet fills the display vertically. The top strip and bottom hinge
+// are pinned; curvature and diffusion develop through the body as the lid closes.
+float4 arcEffect(float2 position, texture2d<float> desktop, constant Parameters &u) {
+    constexpr sampler s(coord::normalized, address::clamp_to_edge, filter::linear, mip_filter::linear);
+    float p = saturate(u.effect.x);
+    float strength = p * saturate(u.effect.y);
+    float bodyY = saturate((position.y - 0.04) / 0.88);
+    float envelope = pow(sin(M_PI_F * bodyY), 2.0);
+    float width = 1.0 - 0.28 * strength * envelope;
+    float left = (1.0 - width) * 0.5;
+    float2 uv = float2((position.x - 0.5) / width + 0.5, position.y);
+    float2 dimensions = max(float2(1), u.surface.yz);
+    float blurResponse = (1.0 - exp(-5.5 * p)) / (1.0 - exp(-5.5));
+    float diffusion = smoothstep(0.035, 0.16, position.y) * (1.0 - smoothstep(0.60, 0.94, position.y));
+    float sigma = 0.034 * saturate(u.effect.z) * blurResponse * diffusion;
+    float sigmaPixels = sigma * dimensions.y;
+    float coverage = 1.0;
+    if (left > 0.00001) {
+        float slope = 0.14 * strength * M_PI_F / 0.88 * sin(2.0 * M_PI_F * bodyY) * dimensions.x / dimensions.y;
+        float normalScale = rsqrt(1.0 + slope * slope);
+        float edgeSigma = max(0.35, sigmaPixels);
+        coverage = gaussianCoverage((position.x - left) * dimensions.x * normalScale, edgeSigma)
+                 * gaussianCoverage((1.0 - left - position.x) * dimensions.x * normalScale, edgeSigma);
+    }
+    if (coverage < 0.00001) return float4(0, 0, 0, 1);
+    float3 color;
+    if (sigmaPixels < 0.35) {
+        color = desktop.sample(s, uv, level(0)).rgb;
+    } else {
+        float2 sourceSigma = sigma * float2(dimensions.y / dimensions.x / width, 1.0);
+        float lod = max(0.0, log2(max(1.0, max(sourceSigma.x * dimensions.x, sourceSigma.y * dimensions.y) * 1.25)));
+        float3 sum = float3(0); float weight = 0;
+        for (int i = 0; i < 24; i++) {
+            float a = float(i) * 2.39996323;
+            float r = sqrt((float(i) + 0.5) / 24.0) * 2.5;
+            float tapWeight = exp(-0.5 * r * r);
+            sum += desktop.sample(s, uv + float2(cos(a), sin(a)) * r * sourceSigma, level(lod)).rgb * tapWeight;
+            weight += tapWeight;
+        }
+        color = sum / weight;
+    }
+    color *= 1.0 - 0.30 * p * saturate(u.effect.w) * envelope;
+    return float4(color * coverage, 1);
+}
+
 fragment float4 bendFragment(Varying in [[stage_in]], texture2d<float> desktop [[texture(0)]], constant Parameters &u [[buffer(0)]]) {
     constexpr sampler s(coord::normalized, address::clamp_to_edge, filter::linear, mip_filter::linear);
     float p = saturate(u.effect.x);
     if (p <= 0.00001) return float4(desktop.sample(s, in.uv, level(0)).rgb, 1);
+    if (u.surface.x > 2.5) return arcEffect(in.uv, desktop, u);
 
     // Project a plane rotating away from a fixed bottom hinge. Blur has a separate,
     // earlier response; compression develops gradually instead of appearing with it.

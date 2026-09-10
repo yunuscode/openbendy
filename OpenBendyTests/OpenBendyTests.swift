@@ -21,9 +21,9 @@ final class OpenBendyTests: XCTestCase {
         let defaults = UserDefaults(suiteName: key)!
         defer { defaults.removePersistentDomain(forName: key) }
         let p = Preferences(defaults: defaults)
-        p.style = .frost; p.blur = 0.23; p.clearAngle = 120; p.sound = false
+        p.style = .arc; p.blur = 0.23; p.clearAngle = 120; p.sound = false
         let restored = Preferences(defaults: defaults)
-        XCTAssertEqual(restored.style, .frost); XCTAssertEqual(restored.blur, 0.23)
+        XCTAssertEqual(restored.style, .arc); XCTAssertEqual(restored.blur, 0.23)
         XCTAssertEqual(restored.clearAngle, 120); XCTAssertFalse(restored.sound)
         p.enabled = true
         XCTAssertTrue(Preferences(defaults: defaults).resumeDesktopEffect)
@@ -101,6 +101,46 @@ final class OpenBendyTests: XCTestCase {
         XCTAssertNoThrow(try renderer.submitPreview(cgImage))
     }
 
+    func testArcBowsSidesWhilePreservingFullHeightAndPinnedEdges() throws {
+        func geometry(_ size: Int) throws -> Double {
+            let fixture = try GPUFixture(width: size, height: size)
+            var previousInset = 0
+            for progress: Float in [0, 0.2, 0.6, 0.9] {
+                let pixels = try fixture.render(progress: progress, blur: 0, shadow: 0, style: 3)
+                for y in 0..<size {
+                    XCTAssertGreaterThan(pixels[(y * size + size / 2) * 4], 250, "Arc must keep the desktop at full height.")
+                }
+                for y in [size / 50, size - 3] { for x in 0..<size {
+                    XCTAssertEqual(pixels[(y * size + x) * 4], 255, "The menu and hinge edges stay pinned.")
+                } }
+                let row = (0..<size).map { Int(pixels[(size / 2 * size + $0) * 4]) }
+                let inset = try XCTUnwrap(row.firstIndex(where: { $0 >= 128 }))
+                XCTAssertGreaterThanOrEqual(inset, previousInset)
+                previousInset = inset
+                for x in 0..<size / 2 { XCTAssertEqual(row[x], row[size - 1 - x], accuracy: 1) }
+            }
+            XCTAssertGreaterThan(previousInset, size / 10, "The body must visibly curve inward.")
+            return Double(previousInset) / Double(size)
+        }
+        XCTAssertEqual(try geometry(256), try geometry(512), accuracy: 0.005)
+    }
+
+    func testArcDiffusionPreservesMenuAndDockAndClearsExactly() throws {
+        let size = 512
+        var pixels = [UInt8](repeating: 255, count: size * size * 4)
+        for y in 0..<size { for x in 0..<size { for channel in 0..<3 {
+            pixels[(y * size + x) * 4 + channel] = (x / 3) % 2 == 0 ? 255 : 0
+        } } }
+        let fixture = try GPUFixture(width: size, height: size, pixels: pixels)
+        let blurred = try fixture.render(progress: 0.12, perspective: 0, blur: 1, shadow: 0, style: 3)
+        let row = (100..<400).map { Int(blurred[(size / 3 * size + $0) * 4]) }
+        XCTAssertLessThan(row.max()! - row.min()!, 100, "The body diffuses early in the lid movement.")
+        for y in [size / 50, size - 3] { for x in 0..<size {
+            XCTAssertEqual(blurred[(y * size + x) * 4], pixels[(y * size + x) * 4])
+        } }
+        XCTAssertEqual(try fixture.render(progress: 0, style: 3), pixels, "Reopening must restore every pixel.")
+    }
+
     func testRenderReferenceReviewFrames() throws {
         let width = 960, height = 600
         let colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -124,15 +164,17 @@ final class OpenBendyTests: XCTestCase {
         let fixture = try GPUFixture(width: width, height: height, pixels: bytes)
         let directory = URL(fileURLWithPath: "/private/tmp/openbendy-qa")
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
-        for (index, progress) in [Float(0), 0.08, 0.3, 0.6, 0.9].enumerated() {
-            let output = try fixture.render(progress: progress, shadow: 0.5)
+        for (label, style) in [("frame", Float(0)), ("arc", Float(3))] {
+          for (index, progress) in [Float(0), 0.08, 0.3, 0.6, 0.9].enumerated() {
+            let output = try fixture.render(progress: progress, shadow: 0.5, style: style)
             let provider = try XCTUnwrap(CGDataProvider(data: Data(output) as CFData))
             let image = try XCTUnwrap(CGImage(width: width, height: height, bitsPerComponent: 8, bitsPerPixel: 32,
                 bytesPerRow: width * 4, space: colorSpace,
                 bitmapInfo: CGBitmapInfo(rawValue: CGBitmapInfo.byteOrder32Little.rawValue | CGImageAlphaInfo.premultipliedFirst.rawValue),
                 provider: provider, decode: nil, shouldInterpolate: false, intent: .defaultIntent))
             let png = try XCTUnwrap(NSBitmapImageRep(cgImage: image).representation(using: .png, properties: [:]))
-            try png.write(to: directory.appendingPathComponent("frame-\(index).png"))
+            try png.write(to: directory.appendingPathComponent("\(label)-\(index).png"))
+          }
         }
     }
 }

@@ -13,7 +13,8 @@ No web view, accounts, third-party packages, or remote services.
 
 - Live lid tracking with a fold anchored at the screen hinge.
 - Progressive blur, soft edges, and adjustable perspective and shadow.
-- Silk, Shade, and Frost styles.
+- Silk, Shade, Frost, and Arc styles.
+- Arc curves the sides inward while keeping the desktop at full height, with softer upper content and sharp outer top and bottom edges.
 - Interactive preview with manual angle control or live lid tracking.
 - Menu bar controls and Esc to pause the desktop effect.
 - Original SVG icons in `Brand/`.
@@ -71,8 +72,8 @@ reconfiguration; enable it again afterward.
 ./build.sh test
 ```
 
-Seven XCTest cases cover preferences, continuous effect progress, real Metal output,
-soft edges, early blur, hinge detail, resolution consistency, and preview texture upload.
+Nine XCTest cases cover preferences, continuous effect progress, real Metal output,
+soft edges, early blur, hinge detail, resolution consistency, Arc geometry and diffusion, and preview texture upload.
 See [QA.md](QA.md) for verification details and remaining device checks.
 
 ## Source map
