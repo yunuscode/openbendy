@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">OpenBendy</title>
+  <desc id="desc">A lowercase b formed from a folded ribbon, with an open counter and a receding upper plane.</desc>
+  <defs>
+    <linearGradient id="fold" x1="194" y1="56" x2="151" y2="250" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#BACD9B"/>
+      <stop offset="1" stop-color="#71866A"/>
+    </linearGradient>
+    <linearGradient id="face" x1="254" y1="218" x2="254" y2="442" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F0F6D7"/>
+      <stop offset="1" stop-color="#C8DDA0"/>
+    </linearGradient>
+  </defs>
+  <path d="M148 74C151 62 158 56 171 56H239C253 56 259 65 255 79L212 238H105L148 74Z" fill="url(#fold)"/>
+  <path fill-rule="evenodd" d="M124 218H284C371 218 427 262 427 330C427 398 371 442 284 442H118C92 442 77 423 84 398L124 250V218ZM183 290L161 370H280C320 370 345 356 345 331C345 306 321 290 280 290H183Z" fill="url(#face)"/>
+  <path d="M124 218H212L202 255L124 218Z" fill="#607956"/>
+  <path d="M212 218H284C340 218 383 237 407 270C381 242 341 226 284 226H210L212 218Z" fill="#FFFFFF" fill-opacity=".42"/>
+</svg>

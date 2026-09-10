@@ -1,0 +1,41 @@
+name: OpenBendy
+options:
+  deploymentTarget:
+    macOS: '14.0'
+settings:
+  base:
+    SWIFT_VERSION: '5.0'
+    MACOSX_DEPLOYMENT_TARGET: '14.0'
+    CODE_SIGN_IDENTITY: '-'
+    CODE_SIGN_STYLE: Manual
+    ENABLE_APP_SANDBOX: NO
+    ENABLE_HARDENED_RUNTIME: YES
+    GENERATE_INFOPLIST_FILE: YES
+targets:
+  OpenBendy:
+    type: application
+    platform: macOS
+    sources: [OpenBendy]
+    settings:
+      base:
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        PRODUCT_BUNDLE_IDENTIFIER: local.yunus.lidfx
+        INFOPLIST_KEY_CFBundleDisplayName: OpenBendy
+        INFOPLIST_KEY_LSUIElement: YES
+        INFOPLIST_KEY_NSScreenCaptureUsageDescription: OpenBendy uses live screen frames to bend your desktop as the lid closes. Frames stay in memory on this Mac.
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.utilities
+        MARKETING_VERSION: '1.0.2'
+        CURRENT_PROJECT_VERSION: '1'
+  OpenBendyTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources: [OpenBendyTests]
+    dependencies:
+      - target: OpenBendy
+schemes:
+  OpenBendy:
+    build:
+      targets:
+        OpenBendy: all
+    test:
+      targets: [OpenBendyTests]

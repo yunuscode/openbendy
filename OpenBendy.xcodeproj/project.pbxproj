@@ -1,0 +1,460 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0CF4602A6122D385E96045E2 /* fold.wav in Resources */ = {isa = PBXBuildFile; fileRef = 68F4D13EC14E5A9C59D55EE7 /* fold.wav */; };
+		0E129ACAF0949BDBFBC20C8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F23E69503498F6553C6532AE /* Assets.xcassets */; };
+		1E45D46C6D43CADF9E1CC187 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E25C0974716E7425DB3D0E /* App.swift */; };
+		272166E634AEEA7ED0702A2E /* EscapeShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413C97F20C59495A71A8BBD0 /* EscapeShortcut.swift */; };
+		37C071957C6DBFF453B8E20E /* OpenBendyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1E7AC537713BDC3450023C /* OpenBendyTests.swift */; };
+		52A9B6EE23F64830BC55B651 /* DesktopRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EA7ECE7BEBFFF54160F5B1 /* DesktopRenderer.swift */; };
+		59CCEDA9D722DF11AC2D3AD7 /* DesktopEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD364F657F952E83D29B800 /* DesktopEffect.swift */; };
+		5A6E4E8328A7C299A3512EDD /* Bend.metal in Sources */ = {isa = PBXBuildFile; fileRef = AE817F1BA2538BED4395A171 /* Bend.metal */; };
+		5FFC29566003C301FA3BC147 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8E30DA1B1C9DBB4B09A68D /* Preferences.swift */; };
+		7E81506E37A624703A349E5A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9AF05232DF25932B3CBDED /* SettingsView.swift */; };
+		DF9260B7212AECC7E6CD9721 /* Landscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E9BFD798F762A75B8BB0F6 /* Landscape.swift */; };
+		F804EE9D9BAF15885C929A91 /* LidSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D69DD59CC82F305819B6A59 /* LidSensor.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		411DA1A4190D4C6B64BD58C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 80CE6BFA53851B08FAB6CF27 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 79EEE39683B5C810E5CC3351;
+			remoteInfo = OpenBendy;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2E9AF05232DF25932B3CBDED /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		413C97F20C59495A71A8BBD0 /* EscapeShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EscapeShortcut.swift; sourceTree = "<group>"; };
+		4D69DD59CC82F305819B6A59 /* LidSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LidSensor.swift; sourceTree = "<group>"; };
+		5BB007D68887F30CC0B4DD73 /* OpenBendyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenBendyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		68F4D13EC14E5A9C59D55EE7 /* fold.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fold.wav; sourceTree = "<group>"; };
+		71E9BFD798F762A75B8BB0F6 /* Landscape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Landscape.swift; sourceTree = "<group>"; };
+		7C1E7AC537713BDC3450023C /* OpenBendyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenBendyTests.swift; sourceTree = "<group>"; };
+		85EA7ECE7BEBFFF54160F5B1 /* DesktopRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesktopRenderer.swift; sourceTree = "<group>"; };
+		9FD364F657F952E83D29B800 /* DesktopEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesktopEffect.swift; sourceTree = "<group>"; };
+		AE817F1BA2538BED4395A171 /* Bend.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Bend.metal; sourceTree = "<group>"; };
+		C9E25C0974716E7425DB3D0E /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		EC50C1A7CC13641BF3C768C9 /* OpenBendy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenBendy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F23E69503498F6553C6532AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FA8E30DA1B1C9DBB4B09A68D /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		29721B1C1EC948E8BE52CDBD = {
+			isa = PBXGroup;
+			children = (
+				30266DE4C290A2F240B473C8 /* OpenBendy */,
+				BCE2AE1B7F1C173448DE6AA7 /* OpenBendyTests */,
+				7ED3A783F743B75006DC023D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		30266DE4C290A2F240B473C8 /* OpenBendy */ = {
+			isa = PBXGroup;
+			children = (
+				C9E25C0974716E7425DB3D0E /* App.swift */,
+				F23E69503498F6553C6532AE /* Assets.xcassets */,
+				AE817F1BA2538BED4395A171 /* Bend.metal */,
+				9FD364F657F952E83D29B800 /* DesktopEffect.swift */,
+				85EA7ECE7BEBFFF54160F5B1 /* DesktopRenderer.swift */,
+				413C97F20C59495A71A8BBD0 /* EscapeShortcut.swift */,
+				71E9BFD798F762A75B8BB0F6 /* Landscape.swift */,
+				4D69DD59CC82F305819B6A59 /* LidSensor.swift */,
+				FA8E30DA1B1C9DBB4B09A68D /* Preferences.swift */,
+				2E9AF05232DF25932B3CBDED /* SettingsView.swift */,
+				7B481E4EF25602E136798330 /* Resources */,
+			);
+			path = OpenBendy;
+			sourceTree = "<group>";
+		};
+		7B481E4EF25602E136798330 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				68F4D13EC14E5A9C59D55EE7 /* fold.wav */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		7ED3A783F743B75006DC023D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC50C1A7CC13641BF3C768C9 /* OpenBendy.app */,
+				5BB007D68887F30CC0B4DD73 /* OpenBendyTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BCE2AE1B7F1C173448DE6AA7 /* OpenBendyTests */ = {
+			isa = PBXGroup;
+			children = (
+				7C1E7AC537713BDC3450023C /* OpenBendyTests.swift */,
+			);
+			path = OpenBendyTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2095F9E4018087A6048CE656 /* OpenBendyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABCF17B04946AD2200463DDF /* Build configuration list for PBXNativeTarget "OpenBendyTests" */;
+			buildPhases = (
+				F6E02596D1D314CDD9352C93 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E6FE697F412855B4EE5E42B2 /* PBXTargetDependency */,
+			);
+			name = OpenBendyTests;
+			packageProductDependencies = (
+			);
+			productName = OpenBendyTests;
+			productReference = 5BB007D68887F30CC0B4DD73 /* OpenBendyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		79EEE39683B5C810E5CC3351 /* OpenBendy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08259B21154AA616A97E9382 /* Build configuration list for PBXNativeTarget "OpenBendy" */;
+			buildPhases = (
+				E3524D820C96B9BDECD58B80 /* Sources */,
+				4869DE0E3BA24BA28DCEE2DC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OpenBendy;
+			packageProductDependencies = (
+			);
+			productName = OpenBendy;
+			productReference = EC50C1A7CC13641BF3C768C9 /* OpenBendy.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		80CE6BFA53851B08FAB6CF27 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					2095F9E4018087A6048CE656 = {
+						ProvisioningStyle = Manual;
+					};
+					79EEE39683B5C810E5CC3351 = {
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = 5D67C237BE1C938AC5C1C731 /* Build configuration list for PBXProject "OpenBendy" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 29721B1C1EC948E8BE52CDBD;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				79EEE39683B5C810E5CC3351 /* OpenBendy */,
+				2095F9E4018087A6048CE656 /* OpenBendyTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4869DE0E3BA24BA28DCEE2DC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E129ACAF0949BDBFBC20C8C /* Assets.xcassets in Resources */,
+				0CF4602A6122D385E96045E2 /* fold.wav in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E3524D820C96B9BDECD58B80 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E45D46C6D43CADF9E1CC187 /* App.swift in Sources */,
+				5A6E4E8328A7C299A3512EDD /* Bend.metal in Sources */,
+				59CCEDA9D722DF11AC2D3AD7 /* DesktopEffect.swift in Sources */,
+				52A9B6EE23F64830BC55B651 /* DesktopRenderer.swift in Sources */,
+				272166E634AEEA7ED0702A2E /* EscapeShortcut.swift in Sources */,
+				DF9260B7212AECC7E6CD9721 /* Landscape.swift in Sources */,
+				F804EE9D9BAF15885C929A91 /* LidSensor.swift in Sources */,
+				5FFC29566003C301FA3BC147 /* Preferences.swift in Sources */,
+				7E81506E37A624703A349E5A /* SettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6E02596D1D314CDD9352C93 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37C071957C6DBFF453B8E20E /* OpenBendyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E6FE697F412855B4EE5E42B2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 79EEE39683B5C810E5CC3351 /* OpenBendy */;
+			targetProxy = 411DA1A4190D4C6B64BD58C0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		5C3DD04F1876FB344D850B8B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenBendy.app/Contents/MacOS/OpenBendy";
+			};
+			name = Release;
+		};
+		6B847B03D42D71002165AB42 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		8EF134B52A26EA2205A89F7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_KEY_CFBundleDisplayName = OpenBendy;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSScreenCaptureUsageDescription = "OpenBendy uses live screen frames to bend your desktop as the lid closes. Frames stay in memory on this Mac.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.2;
+				PRODUCT_BUNDLE_IDENTIFIER = local.yunus.lidfx;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		BE49E2DF4826C5352520369C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_KEY_CFBundleDisplayName = OpenBendy;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSScreenCaptureUsageDescription = "OpenBendy uses live screen frames to bend your desktop as the lid closes. Frames stay in memory on this Mac.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.2;
+				PRODUCT_BUNDLE_IDENTIFIER = local.yunus.lidfx;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		C840DA30538A46252164E193 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OpenBendy.app/Contents/MacOS/OpenBendy";
+			};
+			name = Debug;
+		};
+		CB1ABD3F460CB42A029A3F2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		08259B21154AA616A97E9382 /* Build configuration list for PBXNativeTarget "OpenBendy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8EF134B52A26EA2205A89F7A /* Debug */,
+				BE49E2DF4826C5352520369C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		5D67C237BE1C938AC5C1C731 /* Build configuration list for PBXProject "OpenBendy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB1ABD3F460CB42A029A3F2F /* Debug */,
+				6B847B03D42D71002165AB42 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		ABCF17B04946AD2200463DDF /* Build configuration list for PBXNativeTarget "OpenBendyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C840DA30538A46252164E193 /* Debug */,
+				5C3DD04F1876FB344D850B8B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 80CE6BFA53851B08FAB6CF27 /* Project object */;
+}
