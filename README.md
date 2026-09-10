@@ -18,6 +18,18 @@ No web view, accounts, third-party packages, or remote services.
 - Menu bar controls and Esc to pause the desktop effect.
 - Original SVG icons in `Brand/`.
 
+## Download
+
+Download **OpenBendy-macOS-universal.zip** from the [latest release](https://github.com/yunuscode/openbendy/releases/latest),
+extract it, and move `OpenBendy.app` to Applications.
+
+Requires macOS 14 or later. The binary includes Apple silicon and Intel architectures;
+live lid tracking has been verified on an M3 Pro MacBook Pro only.
+
+The current release is signed with an Apple Development certificate and is **not
+notarized**. It does not currently pass Gatekeeper assessment for public distribution.
+You can also build locally using the instructions below.
+
 ## Build and run
 
 Open `OpenBendy.xcodeproj` in Xcode 26 or later, select the OpenBendy scheme, and Run.
